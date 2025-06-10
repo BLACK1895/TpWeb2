@@ -1,5 +1,5 @@
 {
-  "name": "tpweb2",
+  "name": "his_hospital",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -19,6 +19,7 @@
   "description": "",
   "dependencies": {
     "express": "^5.1.0",
-    "mysql2": "^3.14.1"
+    "mysql2": "^3.14.1",
+    "pug": "^3.0.3"
   }
 }
