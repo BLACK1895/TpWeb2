@@ -18,6 +18,7 @@
   "homepage": "https://github.com/BLACK1895/TpWeb2#readme",
   "description": "",
   "dependencies": {
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "mysql2": "^3.14.1"
   }
 }
