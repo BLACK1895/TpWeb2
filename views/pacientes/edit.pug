@@ -1,0 +1,49 @@
+extends ../layout.pug
+
+block content
+  h1 Editar Paciente
+
+  form(action=`/pacientes/${paciente.id_paciente}?_method=PUT` method="POST")
+    input(type="hidden" name="id_paciente" value=paciente.id_paciente)
+
+    .form-group
+      label(for="nombre") Nombre:
+      input.form-control(type="text" id="nombre" name="nombre" value=paciente.nombre required)
+
+    .form-group
+      label(for="apellido") Apellido:
+      input.form-control(type="text" id="apellido" name="apellido" value=paciente.apellido required)
+
+    .form-group
+      label(for="fecha_nacimiento") Fecha de Nacimiento:
+      input.form-control(type="date" id="fecha_nacimiento" name="fecha_nacimiento" value=paciente.fecha_nacimiento ? paciente.fecha_nacimiento.toISOString().split('T')[0] : '' required)
+
+    .form-group
+      label(for="sexo") Sexo:
+      select.form-control(id="sexo" name="sexo" required)
+        option(value="M" selected=(paciente.sexo === 'M')) Masculino
+        option(value="F" selected=(paciente.sexo === 'F')) Femenino
+        option(value="O" selected=(paciente.sexo === 'O')) Otro
+
+    .form-group
+      label(for="dni") DNI:
+      input.form-control(type="text" id="dni" name="dni" value=paciente.dni required)
+
+    .form-group
+      label(for="telefono") Teléfono:
+      input.form-control(type="text" id="telefono" name="telefono" value=paciente.telefono)
+
+    .form-group
+      label(for="direccion") Dirección:
+      input.form-control(type="text" id="direccion" name="direccion" value=paciente.direccion)
+
+    .form-group
+      label(for="contacto_emergencia_nombre") Contacto de Emergencia (Nombre):
+      input.form-control(type="text" id="contacto_emergencia_nombre" name="contacto_emergencia_nombre" value=paciente.contacto_emergencia_nombre)
+
+    .form-group
+      label(for="contacto_emergencia_telefono") Contacto de Emergencia (Teléfono):
+      input.form-control(type="text" id="contacto_emergencia_telefono" name="contacto_emergencia_telefono" value=paciente.contacto_emergencia_telefono)
+
+    button.btn.btn-primary(type="submit") Guardar Cambios
+    a.btn.btn-secondary(href="/pacientes") Cancelar

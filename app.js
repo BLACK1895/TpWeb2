@@ -2,13 +2,16 @@ const express = require('express');
 const pacientesRoutes = require('./routes/pacientesRoutes');
 const path = require('path');
 const db = require('./config/db');
+const methodOverride = require('method-override');
 const app = express();
+
 
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(methodOverride('_method'));
 app.use('/pacientes', pacientesRoutes);
 
 app.get('/', (req, res) => {

@@ -17,7 +17,7 @@ block content
           th Fecha Nacimiento
           th Sexo
           th Teléfono
-          th Acciones
+          th Cargar Paciente
       tbody
         each paciente in pacientes
           tr
@@ -30,8 +30,8 @@ block content
             td
               p
               a(href="/pacientes/nuevo") Registrar Nuevo Paciente
-              a(href=`/pacientes/${paciente.id_paciente}/editar`) 
-              | &nbsp; // Espacio entre enlaces (mantengo el | &nbsp;)
+              a(href=`/pacientes/${paciente.id_paciente}/editar`) Editar
+              | &nbsp; ( &nbsp;)
               a(href=`/pacientes/${paciente.id_paciente}/eliminar`)  
   else
     p No hay pacientes registrados.

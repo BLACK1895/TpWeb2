@@ -48,3 +48,18 @@ exports.getAllPacientes = async (req, res) => {
     res.status(500).send('Error interno al obtener el listado de pacientes.');
   }
 };
+
+exports.renderEditPacienteForm = async (req, res) => {
+    const pacienteId = req.params.id;
+    try {
+        const [rows] = await db.query('SELECT * FROM pacientes WHERE id_paciente = ?', [pacienteId]);
+        if (rows.length === 0) {
+            return res.status(404).send('Paciente no encontrado');
+        }
+        const paciente = rows[0];
+        res.render('pacientes/edit', { title: 'Editar Paciente', paciente: paciente });
+    } catch (error) {
+        console.error('Error al obtener paciente para edición:', error);
+        res.status(500).send('Error interno al cargar el formulario de edición.');
+    }
+};
