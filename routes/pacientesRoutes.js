@@ -6,4 +6,5 @@ router.get('/', pacienteController.getAllPacientes);
 router.get('/nuevo', pacienteController.renderNewPacienteForm);
 router.post('/', pacienteController.createPaciente);
 router.get('/:id/editar', pacienteController.renderEditPacienteForm);
+router.put('/:id', pacienteController.updatePaciente);
 module.exports = router;

@@ -63,3 +63,52 @@ exports.renderEditPacienteForm = async (req, res) => {
         res.status(500).send('Error interno al cargar el formulario de edición.');
     }
 };
+
+exports.updatePaciente = async (req, res) => {
+    const pacienteId = req.params.id;
+    const {
+        nombre,
+        apellido,
+        fecha_nacimiento,
+        sexo,
+        dni,
+        telefono,
+        direccion,
+        contacto_emergencia_nombre,
+        contacto_emergencia_telefono
+    } = req.body; 
+
+    try {
+        const query = `
+            UPDATE pacientes SET
+            nombre = ?,
+            apellido = ?,
+            fecha_nacimiento = ?,
+            sexo = ?,
+            dni = ?,
+            telefono = ?,
+            direccion = ?,
+            contacto_emergencia_nombre = ?,
+            contacto_emergencia_telefono = ?
+            WHERE id_paciente = ?
+        `;
+        const values = [
+            nombre,
+            apellido,
+            fecha_nacimiento,
+            sexo,
+            dni,
+            telefono,
+            direccion,
+            contacto_emergencia_nombre,
+            contacto_emergencia_telefono,
+            pacienteId
+        ];
+
+        await db.query(query, values);
+        res.redirect('/pacientes');
+    } catch (error) {
+        console.error('Error al actualizar paciente:', error);
+        res.status(500).send('Algo salió mal al actualizar el paciente.');
+    }
+};
