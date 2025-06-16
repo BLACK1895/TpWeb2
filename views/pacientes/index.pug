@@ -1,0 +1,37 @@
+
+extends ../layout.pug
+
+block content
+  h1 Listado de Pacientes
+
+  p
+    a(href="/pacientes/nuevo") 
+
+  if pacientes && pacientes.length > 0 
+    table.table.table-striped
+      thead
+        tr
+          th ID
+          th Nombre Completo
+          th DNI
+          th Fecha Nacimiento
+          th Sexo
+          th Teléfono
+          th Acciones
+      tbody
+        each paciente in pacientes
+          tr
+            td= paciente.id_paciente 
+            td #{paciente.nombre} #{paciente.apellido} 
+            td= paciente.dni 
+            td= paciente.fecha_nacimiento ? paciente.fecha_nacimiento.toISOString().split('T')[0] : '' 
+            td= paciente.sexo 
+            td= paciente.telefono
+            td
+              p
+              a(href="/pacientes/nuevo") Registrar Nuevo Paciente
+              a(href=`/pacientes/${paciente.id_paciente}/editar`) 
+              | &nbsp; // Espacio entre enlaces (mantengo el | &nbsp;)
+              a(href=`/pacientes/${paciente.id_paciente}/eliminar`)  
+  else
+    p No hay pacientes registrados.
