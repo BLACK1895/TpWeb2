@@ -25,14 +25,7 @@ module.exports = {
       "ssl": {
         "require": true,
         "rejectUnauthorized": false,
-        "minVersion": "TLSv1.2",
-        "ciphers": "TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256:TLS_AES_128_GCM_SHA256:HIGH:!aNULL:!MD5:!RC4:!DH",
-        "ca": fs.readFileSync(__dirname + '/../ca-cert.pem')
       },
-      "authPlugins": {
-        "mysql_clear_password": () => Buffer.from(process.env.DB_PASSWORD_PROD + '\0')
-      },
-       "timezone": "Z"
     }
   }
 };

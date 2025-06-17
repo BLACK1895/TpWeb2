@@ -1,4 +1,3 @@
-require('dotenv').config();
 const express = require('express');
 const pacientesRoutes = require('./routes/pacientesRoutes');
 const path = require('path');
