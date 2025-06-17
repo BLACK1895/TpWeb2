@@ -1,4 +1,4 @@
-{
+module.exports = {
   "development": {
     "username": "root",
     "password": "root",
@@ -14,17 +14,17 @@
     "dialect": "mysql"
   },
   "production": {
-   "username": process.env.DB_USERNAME_PROD,
-   "password": process.env.DB_PASSWORD_PROD,
-   "database": process.env.DB_DATABASE_PROD,
-   "host": process.env.DB_HOST_PROD,
-   "dialect": "mysql",
-   "logging": false, 
+    "username": process.env.DB_USERNAME_PROD,
+    "password": process.env.DB_PASSWORD_PROD,
+    "database": process.env.DB_DATABASE_PROD,
+    "host": process.env.DB_HOST_PROD,
+    "dialect": "mysql",
+    "logging": false,
     "dialectOptions": {
       "ssl": {
         "require": true,
-        "rejectUnauthorized": false 
+        "rejectUnauthorized": false
       }
     }
   }
-}
+}; // <--- Y ESTA LLAVE DE CIERRE Y PUNTO Y COMA
