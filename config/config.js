@@ -25,8 +25,8 @@ module.exports = {
         "require": true,
         "rejectUnauthorized": false
       },
-      "authPlugins":{
-        "mysql_clear_password": () => () => Buffer.from(process.env.DB_PASSWORD_PROD + '\0')
+ "authPlugins": {
+        "mysql_clear_password": () => Buffer.from(process.env.DB_PASSWORD_PROD + '\0')
       }
     }
   }
