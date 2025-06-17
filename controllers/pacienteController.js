@@ -112,3 +112,13 @@ exports.updatePaciente = async (req, res) => {
         res.status(500).send('Algo salió mal al actualizar el paciente.');
     }
 };
+exports.deletePaciente = async (req, res) => {
+    const pacienteId = req.params.id;
+    try {
+        await db.query('DELETE FROM pacientes WHERE id_paciente = ?', [pacienteId]);
+        res.status(200).json({ message: 'Paciente eliminado con éxito', id: pacienteId });
+      } catch (error) {
+        console.error('Error al eliminar paciente:', error);
+        res.status(500).json({ message: 'Error al eliminar el paciente', error: error.message });
+    }
+};

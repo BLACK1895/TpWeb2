@@ -5,13 +5,30 @@ html(lang="es")
     meta(charset="UTF-8")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
     title= title || 'Sistema Hospitalario HIS'
-    link(rel="stylesheet", href="/css/style.css")
-  body
+    link(rel="stylesheet", href="/css/style.css") 
+
+  body(class=(isHomePage ? 'home-background' : '')).d-flex.flex-column.min-vh-100
     header
-      nav
-        a(href="/") Inicio
-        a(href="/pacientes") Pacientes
-    main
-      block content 
-    footer
-      p &copy; 2025 Sistema Hospitalario HIS
+      nav.navbar.navbar-expand-lg.navbar-light.bg-light 
+        .container-fluid
+          a.navbar-brand(href="/") HIS
+          button.navbar-toggler(type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation")
+            span.navbar-toggler-icon
+          #navbarNav.collapse.navbar-collapse
+            ul.navbar-nav
+              li.nav-item
+                a.nav-link(href="/") Inicio
+              li.nav-item
+                a.nav-link(href="/pacientes") Pacientes
+
+    main.flex-grow-1.d-flex.justify-content-center.align-items-center
+      .container
+        if success_msg && success_msg.length > 0
+          .alert.alert-success.mt-3= success_msg
+        if error_msg && error_msg.length > 0
+          .alert.alert-danger.mt-3= error_msg
+        block content
+
+    footer.mt-auto.py-3.bg-light
+      .container.text-center
+        p &copy; 2025 Sistema Hospitalario HIS

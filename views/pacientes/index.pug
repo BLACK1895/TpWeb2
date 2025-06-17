@@ -1,13 +1,12 @@
-
 extends ../layout.pug
 
 block content
   h1 Listado de Pacientes
 
   p
-    a(href="/pacientes/nuevo") 
+    a.btn.btn-danger(href="/pacientes/nuevo") Registrar Nuevo Paciente
 
-  if pacientes && pacientes.length > 0 
+  if pacientes && pacientes.length > 0
     table.table.table-striped
       thead
         tr
@@ -17,22 +16,74 @@ block content
           th Fecha Nacimiento
           th Sexo
           th Teléfono
-          th Cargar Paciente
+          th Acciones
       tbody
         each paciente in pacientes
-          tr
-            td= paciente.id_paciente 
-            td #{paciente.nombre} #{paciente.apellido} 
-            td= paciente.dni 
-            td= paciente.fecha_nacimiento ? paciente.fecha_nacimiento.toISOString().split('T')[0] : '' 
-            td= paciente.sexo 
+          tr(id=`paciente-row-${paciente.id_paciente}`)
+            td= paciente.id_paciente
+            td #{paciente.nombre} #{paciente.apellido}
+            td= paciente.dni
+            td= paciente.fecha_nacimiento ? paciente.fecha_nacimiento.toISOString().split('T')[0] : ''
+            td= paciente.sexo
             td= paciente.telefono
             td
-              p
-              a(href="/pacientes/nuevo") Registrar
-              
-              a(href=`/pacientes/${paciente.id_paciente}/editar`) Editar
-              | &nbsp; ( &nbsp;)
-              a(href=`/pacientes/${paciente.id_paciente}/eliminar`)  
+              a.btn.btn-primary(href=`/pacientes/${paciente.id_paciente}/editar`) Editar
+              | &nbsp;
+              form.delete-form(action=`/pacientes/${paciente.id_paciente}?_method=DELETE` method="POST" style="display:inline;" data-id=paciente.id_paciente)
+                button.btn.btn-danger(type="submit") Eliminar
   else
     p No hay pacientes registrados.
+
+  script.
+    document.addEventListener('DOMContentLoaded', () => {
+      const deleteForms = document.querySelectorAll('.delete-form');
+
+      deleteForms.forEach(form => {
+        form.addEventListener('submit', async (event) => {
+          event.preventDefault();
+
+          const confirmDelete = confirm('¿Estás seguro de que quieres eliminar este paciente?');
+          if (!confirmDelete) {
+            return;
+          }
+
+          const pacienteId = form.dataset.id;
+          const url = form.action;
+
+          try {
+            const response = await fetch(url, {
+              method: 'POST',
+              headers: {
+                'X-HTTP-Method-Override': 'DELETE'
+              }
+            });
+
+            if (!response.ok) {
+              const errorData = await response.json();
+              throw new Error(errorData.message || 'Error al eliminar paciente');
+            }
+
+            const data = await response.json();
+            console.log(data.message);
+
+            const rowToRemove = document.getElementById(`paciente-row-${pacienteId}`);
+            if (rowToRemove) {
+              rowToRemove.remove();
+            }
+
+            const tbody = document.querySelector('tbody');
+            if (tbody && tbody.children.length === 0) {
+              const table = document.querySelector('table');
+              if (table) table.remove();
+              const noPatientsMessage = document.createElement('p');
+              noPatientsMessage.textContent = 'No hay pacientes registrados.';
+              document.querySelector('.container').appendChild(noPatientsMessage);
+            }
+
+          } catch (error) {
+            console.error('Hubo un problema con la operación fetch:', error);
+            alert(`Error: ${error.message}`);
+          }
+        });
+      });
+    });

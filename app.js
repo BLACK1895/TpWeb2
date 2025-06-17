@@ -15,7 +15,7 @@ app.use(methodOverride('_method'));
 app.use('/pacientes', pacientesRoutes);
 
 app.get('/', (req, res) => {
-    res.render('index', { title: 'Bienvenido al HIS' });//
+    res.render('index', { title: 'Bienvenido al HIS', isHomePage: true });//
 });
 app.use((req, res, next) => {
     res.status(404).send('Página no encontrada');
