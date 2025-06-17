@@ -27,4 +27,4 @@ module.exports = {
       }
     }
   }
-}; // <--- Y ESTA LLAVE DE CIERRE Y PUNTO Y COMA
+};
