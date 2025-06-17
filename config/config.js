@@ -24,8 +24,8 @@ module.exports = {
       "ssl": {
         "require": true,
         "rejectUnauthorized": false
-      }
-      "authPlugins": {
+      },
+      "authPlugins":{
         "mysql_clear_password": () => () => Buffer.from(process.env.DB_PASSWORD_PROD + '\0')
       }
     }
