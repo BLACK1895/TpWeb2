@@ -1,5 +1,3 @@
-// controllers/pacienteController.js
-
 exports.renderNewPacienteForm = (req, res) => {
   res.render('pacientes/new', { title: 'Registrar Nuevo Paciente' });
 };
@@ -109,11 +107,11 @@ exports.deletePaciente = async (req, res) => {
 
   try {
     const deletedRows = await req.db.Paciente.destroy({
-      where: { id: pacienteId }
+      where: { id: id }
     });
 
     if (deletedRows > 0) {
-      res.status(200).json({ message: 'Paciente eliminado con éxito', id: pacienteId });
+      res.status(200).json({ message: 'Paciente eliminado con éxito', id:id });
     } else {
       res.status(404).json({ message: 'Paciente no encontrado para eliminar.' });
     }
