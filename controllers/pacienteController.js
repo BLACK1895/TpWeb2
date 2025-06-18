@@ -1,3 +1,5 @@
+// controllers/pacienteController.js
+
 exports.renderNewPacienteForm = (req, res) => {
   res.render('pacientes/new', { title: 'Registrar Nuevo Paciente' });
 };
@@ -104,6 +106,7 @@ exports.updatePaciente = async (req, res) => {
 
 exports.deletePaciente = async (req, res) => {
   const pacienteId = req.params.id;
+
   try {
     const deletedRows = await req.db.Paciente.destroy({
       where: { id: pacienteId }
