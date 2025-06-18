@@ -14,15 +14,27 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Paciente.init({
+    id_paciente: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+      allowNull: false
+    },
+
     nombre: DataTypes.STRING,
     apellido: DataTypes.STRING,
-    dni: DataTypes.STRING,
     fecha_nacimiento: DataTypes.DATE,
     sexo: DataTypes.STRING,
-    telefono: DataTypes.STRING
+    dni: DataTypes.STRING,
+    telefono: DataTypes.STRING,
+    direccion: DataTypes.STRING,
+    contacto_emergencia_nombre: DataTypes.STRING,
+    contacto_emergencia_telefono: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Paciente',
+    tableName: 'Pacientes',
+    underscored: true 
   });
   return Paciente;
 };

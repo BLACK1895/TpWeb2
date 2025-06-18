@@ -19,17 +19,17 @@ block content
           th Acciones
       tbody
         each paciente in pacientes
-          tr(id=`paciente-row-${paciente.id_paciente}`)
-            td= paciente.id_paciente
+          tr(id=`paciente-row-${paciente.id}`) // <-- CAMBIO AQUÍ: paciente.id
+            td= paciente.id // <-- CAMBIO AQUÍ: paciente.id
             td #{paciente.nombre} #{paciente.apellido}
             td= paciente.dni
             td= paciente.fecha_nacimiento ? paciente.fecha_nacimiento.toISOString().split('T')[0] : ''
             td= paciente.sexo
             td= paciente.telefono
             td
-              a.btn.btn-primary(href=`/pacientes/${paciente.id_paciente}/editar`) Editar
+              a.btn.btn-primary(href=`/pacientes/${paciente.id}/editar`) Editar // <-- CAMBIO AQUÍ: paciente.id
               | &nbsp;
-              form.delete-form(action=`/pacientes/${paciente.id_paciente}?_method=DELETE` method="POST" style="display:inline;" data-id=paciente.id_paciente)
+              form.delete-form(action=`/pacientes/${paciente.id}?_method=DELETE` method="POST" style="display:inline;" data-id=paciente.id) // <-- CAMBIO AQUÍ: paciente.id
                 button.btn.btn-danger(type="submit") Eliminar
   else
     p No hay pacientes registrados.
