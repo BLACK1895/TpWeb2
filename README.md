@@ -1,6 +1,3 @@
-¡Excelente idea! Un buen README.md es fundamental para cualquier repositorio de GitHub. No solo ayuda a otros a entender tu proyecto, sino que también te sirve a ti mismo como documentación.
-
-Aquí tienes una plantilla completa y bien estructurada para tu README.md para el proyecto his_hospital (TpWeb2), con secciones clave que puedes adaptar. Solo tienes que copiarlo, pegar en un archivo llamado README.md en la raíz de tu repositorio, y rellenar los detalles específicos.
 🏥 HIS Hospital - Sistema de Gestión de Pacientes
 Descripción del Proyecto
 
