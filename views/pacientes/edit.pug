@@ -5,7 +5,7 @@ block content
 
 
   form(action=`/pacientes/${paciente.id}?_method=PUT` method="POST")
-    input(type="hidden" name="id" value=paciente.id) // También cambiamos el 'name' a 'id'
+    input(type="hidden" name="id" value=paciente.id)
 
     .form-group
       label(for="nombre") Nombre:
