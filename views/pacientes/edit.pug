@@ -1,10 +1,14 @@
+// views/pacientes/edit.pug (código corregido)
+
 extends ../layout.pug
 
 block content
   h1 Editar Paciente
 
-  form(action=`/pacientes/${paciente.id_paciente}?_method=PUT` method="POST")
-    input(type="hidden" name="id_paciente" value=paciente.id_paciente)
+  // CAMBIO CLAVE AQUÍ: usar paciente.id en lugar de paciente.id_paciente
+  form(action=`/pacientes/${paciente.id}?_method=PUT` method="POST")
+    // Y también en el campo hidden si lo estás enviando en el body, aunque no es estrictamente necesario si ya va en la URL
+    input(type="hidden" name="id" value=paciente.id) // También cambiamos el 'name' a 'id'
 
     .form-group
       label(for="nombre") Nombre:
@@ -16,7 +20,8 @@ block content
 
     .form-group
       label(for="fecha_nacimiento") Fecha de Nacimiento:
-      input.form-control(type="date" id="fecha_nacimiento" name="fecha_nacimiento" value=paciente.fecha_nacimiento ? paciente.fecha_nacimiento.toISOString().split('T')[0] : '' required)
+      // Asegurarse de que la fecha se formatea correctamente para el input type="date"
+      input.form-control(type="date" id="fecha_nacimiento" name="fecha_nacimiento" value=formattedFechaNacimiento required)
 
     .form-group
       label(for="sexo") Sexo:
