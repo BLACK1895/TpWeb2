@@ -38,8 +38,8 @@ app.use((err, req, res, next) => {
     res.status(500).send('¡Algo salió mal en el servidor!');
 });
 
-const PORT = process.env.PORT;
-db.sequelize.sync({ alter: true })
+const PORT = process.env.PORT || 3000;
+db.sequelize.sync({ alter: true }) 
     .then(() => {
         console.log('Base de datos sincronizada correctamente.');
         app.listen(PORT, '0.0.0.0', () => {
